@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lost & Found - Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h1>Lost & Found</h1>
+
+        <h2>Dashboard</h2>
+
+        <p id="welcomeMessage">Loading...</p>
+
+        <button id="logoutButton">Logout</button>
+
+    </div>
+
+    <script>
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+
+            window.location.href = "index.html";
+
+        }
+
+        fetch("http://localhost:5000/api/profile", {
+            method: "GET",
+
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.user) {
+
+                document.getElementById("welcomeMessage").textContent =
+                    "Welcome, " + data.user.email;
+
+            } else {
+
+                localStorage.removeItem("token");
+                window.location.href = "index.html";
+
+            }
+
+        })
+        .catch(error => {
+
+            console.error(error);
+
+        });
+
+
+        document.getElementById("logoutButton").addEventListener("click", () => {
+
+            localStorage.removeItem("token");
+
+            window.location.href = "index.html";
+
+        });
+
+    </script>
+
+</body>
+</html>
