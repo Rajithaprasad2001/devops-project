@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,69 +10,558 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="dashboard-page">
 
-    <div class="login-container">
+<div class="dashboard-layout">
 
-        <h1>Lost & Found</h1>
+    <!-- ================= SIDEBAR ================= -->
 
-        <h2>Dashboard</h2>
+    <aside class="sidebar">
 
-        <p id="welcomeMessage">Loading...</p>
+        <div class="sidebar-logo">
+            Lost<span>&</span>Found
+        </div>
 
-        <button id="logoutButton">Logout</button>
+        <div class="sidebar-menu">
 
-    </div>
+            <button class="menu-item active">
+                <span>🏠</span>
+                Dashboard
+            </button>
 
-    <script>
+            <button class="menu-item">
+                <span>🔍</span>
+                Lost Items
+            </button>
 
-        const token = localStorage.getItem("token");
+            <button class="menu-item">
+                <span>📦</span>
+                Found Items
+            </button>
 
-        if (!token) {
+            <button class="menu-item">
+                <span>➕</span>
+                Report Item
+            </button>
 
-            window.location.href = "index.html";
+            <button class="menu-item">
+                <span>💬</span>
+                Messages
+            </button>
+
+            <button class="menu-item">
+                <span>❤️</span>
+                My Reports
+            </button>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <button class="menu-item">
+                <span>⚙️</span>
+                Settings
+            </button>
+
+            <button
+                class="menu-item logout-menu"
+                onclick="logout()"
+            >
+                <span>🚪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="dashboard-main">
+
+        <!-- TOP NAVBAR -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Welcome back! Here's what's happening today.
+                </p>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button class="notification-btn">
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-avatar">
+                        👤
+                    </div>
+
+                    <div class="profile-info">
+
+                        <strong id="userName">
+                            User
+                        </strong>
+
+                        <span id="userEmail">
+                            user@email.com
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    🔍
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Lost Items
+                    </span>
+
+                    <h2>
+                        24
+                    </h2>
+
+                    <p class="stat-positive">
+                        ↑ 12% this month
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    📦
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Found Items
+                    </span>
+
+                    <h2>
+                        18
+                    </h2>
+
+                    <p class="stat-positive">
+                        ↑ 8% this month
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    🤝
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        Items Returned
+                    </span>
+
+                    <h2>
+                        12
+                    </h2>
+
+                    <p class="stat-positive">
+                        ↑ 15% this month
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    ❤️
+                </div>
+
+                <div>
+
+                    <span class="stat-label">
+                        My Reports
+                    </span>
+
+                    <h2>
+                        6
+                    </h2>
+
+                    <p class="stat-neutral">
+                        Active reports
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        What would you like to do?
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <button class="action-card">
+
+                    <div class="action-icon blue-bg">
+                        🔍
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Search Lost Items
+                        </h3>
+
+                        <p>
+                            Find an item someone reported lost.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <button class="action-card">
+
+                    <div class="action-icon green-bg">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Report Found Item
+                        </h3>
+
+                        <p>
+                            Help someone find their lost item.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <button class="action-card">
+
+                    <div class="action-icon orange-bg">
+                        📢
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Report Lost Item
+                        </h3>
+
+                        <p>
+                            Tell others about your lost item.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECENT ITEMS ================= -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Recent Items
+                    </h2>
+
+                    <p>
+                        Recently reported lost and found items.
+                    </p>
+
+                </div>
+
+                <button class="view-all">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="items-grid">
+
+
+                <!-- ITEM 1 -->
+
+                <div class="item-card">
+
+                    <div class="item-image blue-item">
+                        🎧
+                    </div>
+
+                    <div class="item-content">
+
+                        <span class="item-status lost">
+                            LOST
+                        </span>
+
+                        <h3>
+                            Wireless Headphones
+                        </h3>
+
+                        <p>
+                            📍 Main Street
+                        </p>
+
+                        <span class="item-time">
+                            2 hours ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITEM 2 -->
+
+                <div class="item-card">
+
+                    <div class="item-image green-item">
+                        📱
+                    </div>
+
+                    <div class="item-content">
+
+                        <span class="item-status found">
+                            FOUND
+                        </span>
+
+                        <h3>
+                            Black Smartphone
+                        </h3>
+
+                        <p>
+                            📍 Library
+                        </p>
+
+                        <span class="item-time">
+                            5 hours ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITEM 3 -->
+
+                <div class="item-card">
+
+                    <div class="item-image orange-item">
+                        🎒
+                    </div>
+
+                    <div class="item-content">
+
+                        <span class="item-status lost">
+                            LOST
+                        </span>
+
+                        <h3>
+                            Black Backpack
+                        </h3>
+
+                        <p>
+                            📍 Bus Station
+                        </p>
+
+                        <span class="item-time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ITEM 4 -->
+
+                <div class="item-card">
+
+                    <div class="item-image purple-item">
+                        🔑
+                    </div>
+
+                    <div class="item-content">
+
+                        <span class="item-status found">
+                            FOUND
+                        </span>
+
+                        <h3>
+                            Set of Keys
+                        </h3>
+
+                        <p>
+                            📍 City Center
+                        </p>
+
+                        <span class="item-time">
+                            Yesterday
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       LOAD USER
+    ========================= */
+
+    const userData =
+        localStorage.getItem("user");
+
+
+    if (userData) {
+
+        try {
+
+            const user =
+                JSON.parse(userData);
+
+
+            if (user.name) {
+
+                document.getElementById(
+                    "userName"
+                ).textContent = user.name;
+
+            }
+
+
+            if (user.email) {
+
+                document.getElementById(
+                    "userEmail"
+                ).textContent = user.email;
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Unable to load user data"
+            );
 
         }
 
-        fetch("http://localhost:5000/api/profile", {
-            method: "GET",
-
-            headers: {
-                "Authorization": "Bearer " + token
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-
-            if (data.user) {
-
-                document.getElementById("welcomeMessage").textContent =
-                    "Welcome, " + data.user.email;
-
-            } else {
-
-                localStorage.removeItem("token");
-                window.location.href = "index.html";
-
-            }
-
-        })
-        .catch(error => {
-
-            console.error(error);
-
-        });
+    }
 
 
-        document.getElementById("logoutButton").addEventListener("click", () => {
+    /* =========================
+       LOGOUT
+    ========================= */
 
-            localStorage.removeItem("token");
+    function logout() {
 
-            window.location.href = "index.html";
+        localStorage.removeItem("token");
 
-        });
+        localStorage.removeItem("user");
 
-    </script>
+        window.location.href =
+            "index.html";
+
+    }
+
+</script>
 
 </body>
 </html>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Lost & Found - Login</title>
 
     <link rel="stylesheet" href="style.css">
@@ -10,37 +12,400 @@
 
 <body>
 
-    <div class="login-container">
+<div class="auth-container">
 
-        <h1>Lost & Found</h1>
+    <!-- LEFT SIDE -->
+    <div class="auth-info">
 
-        <h2>Login</h2>
+        <div class="logo">
+            Lost<span>&</span>Found
+        </div>
 
-        <form id="loginForm">
+        <h1>
+            Find what you lost.<br>
+            Return what you found.
+        </h1>
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                required
-            >
+        <p>
+            A simple and secure platform to report,
+            find and return lost items.
+        </p>
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                required
-            >
+        <div class="info-items">
 
-            <button type="submit">Login</button>
+            <div class="info-item">
 
-        </form>
+                <div class="info-icon">
+                    🔍
+                </div>
 
-        <p id="message"></p>
+                <div>
+                    <h3>Find Lost Items</h3>
+
+                    <p>
+                        Search for items reported by others.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    📦
+                </div>
+
+                <div>
+                    <h3>Report Found Items</h3>
+
+                    <p>
+                        Help others by reporting items you found.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    🔐
+                </div>
+
+                <div>
+                    <h3>Safe & Secure</h3>
+
+                    <p>
+                        Your account information is protected.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <script src="script.js"></script>
+
+    <!-- RIGHT SIDE -->
+    <div class="auth-card">
+
+        <div class="auth-header">
+
+            <div class="mobile-logo">
+                Lost<span>&</span>Found
+            </div>
+
+            <h2>
+                Welcome Back 👋
+            </h2>
+
+            <p>
+                Login to your Lost & Found account
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('loginPassword', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-options">
+
+                <label class="remember">
+
+                    <input type="checkbox">
+
+                    Remember me
+
+                </label>
+
+
+                <a
+                    href="#"
+                    onclick="forgotPassword()"
+                >
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+
+        <!-- SIGN UP LINK -->
+
+        <div class="signup-text">
+
+            Don't have an account?
+
+            <button
+                type="button"
+                class="signup-link"
+                onclick="showSignup()"
+            >
+                Create Account
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SIGN UP MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="signupModal"
+>
+
+    <div class="signup-card">
+
+        <button
+            class="close-button"
+            onclick="closeSignup()"
+        >
+            ×
+        </button>
+
+
+        <div class="signup-header">
+
+            <div class="signup-icon">
+                👤
+            </div>
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Create your Lost & Found account
+            </p>
+
+        </div>
+
+
+        <!-- SIGN UP FORM -->
+
+        <form id="signupForm">
+
+
+            <!-- NAME -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="firstName">
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="firstName"
+                        placeholder="First name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="lastName">
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="lastName"
+                        placeholder="Last name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="signupEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="signupPassword">
+                    Password
+                </label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('signupPassword', this)"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- TERMS -->
+
+            <label class="terms">
+
+                <input
+                    type="checkbox"
+                    required
+                >
+
+                <span>
+                    I agree to the
+                    <a href="#">
+                        Terms & Conditions
+                    </a>
+                </span>
+
+            </label>
+
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div class="already-account">
+
+            Already have an account?
+
+            <button
+                type="button"
+                onclick="closeSignup()"
+            >
+                Login
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
