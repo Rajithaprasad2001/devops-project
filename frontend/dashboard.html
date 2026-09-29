@@ -2,94 +2,189 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Lost & Found - Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body class="dashboard-page">
 
+
 <div class="dashboard-layout">
+
 
     <!-- ================= SIDEBAR ================= -->
 
     <aside class="sidebar">
 
+
         <div class="sidebar-logo">
+
             Lost<span>&</span>Found
+
         </div>
+
 
         <div class="sidebar-menu">
 
-            <button class="menu-item active">
+
+            <!-- DASHBOARD -->
+
+            <button
+                class="menu-item active"
+                onclick="goDashboard()"
+            >
+
                 <span>🏠</span>
+
                 Dashboard
+
             </button>
 
-            <button class="menu-item">
+
+            <!-- LOST ITEMS -->
+
+            <button
+                class="menu-item"
+                onclick="goLostItems()"
+            >
+
                 <span>🔍</span>
+
                 Lost Items
+
             </button>
 
-            <button class="menu-item">
+
+            <!-- FOUND ITEMS -->
+
+            <button
+                class="menu-item"
+                onclick="goFoundItems()"
+            >
+
                 <span>📦</span>
+
                 Found Items
+
             </button>
 
-            <button class="menu-item">
+
+            <!-- REPORT ITEM -->
+
+            <button
+                class="menu-item"
+                onclick="reportItem()"
+            >
+
                 <span>➕</span>
+
                 Report Item
+
             </button>
 
-            <button class="menu-item">
+
+            <!-- MESSAGES -->
+
+            <button
+                class="menu-item"
+                onclick="openMessages()"
+            >
+
                 <span>💬</span>
+
                 Messages
+
             </button>
 
-            <button class="menu-item">
+
+            <!-- MY REPORTS -->
+
+            <button
+                class="menu-item"
+                onclick="openMyReports()"
+            >
+
                 <span>❤️</span>
+
                 My Reports
+
             </button>
+
 
         </div>
 
 
+
+        <!-- ================= SIDEBAR BOTTOM ================= -->
+
         <div class="sidebar-bottom">
 
-            <button class="menu-item">
+
+            <!-- SETTINGS -->
+
+            <button
+                class="menu-item"
+                onclick="openSettings()"
+            >
+
                 <span>⚙️</span>
+
                 Settings
+
             </button>
+
+
+            <!-- LOGOUT -->
 
             <button
                 class="menu-item logout-menu"
                 onclick="logout()"
             >
+
                 <span>🚪</span>
+
                 Logout
+
             </button>
+
 
         </div>
 
+
     </aside>
+
 
 
     <!-- ================= MAIN ================= -->
 
     <main class="dashboard-main">
 
-        <!-- TOP NAVBAR -->
+
+        <!-- ================= TOP NAVBAR ================= -->
 
         <header class="dashboard-header">
+
 
             <div>
 
                 <h1>
                     Dashboard
                 </h1>
+
 
                 <p>
                     Welcome back! Here's what's happening today.
@@ -98,470 +193,1429 @@
             </div>
 
 
+
             <div class="header-right">
 
-                <button class="notification-btn">
+
+                <!-- NOTIFICATION -->
+
+                <button
+                    class="notification-btn"
+                    onclick="openNotifications()"
+                    title="Notifications"
+                >
+
                     🔔
-                    <span class="notification-dot"></span>
+
+                    <span
+                        class="notification-dot"
+                    ></span>
+
                 </button>
 
 
-                <div class="profile">
+
+                <!-- PROFILE -->
+
+                <div
+                    class="profile"
+                    onclick="openProfile()"
+                    style="cursor: pointer;"
+                >
+
 
                     <div class="profile-avatar">
+
                         👤
+
                     </div>
+
+
 
                     <div class="profile-info">
 
+
                         <strong id="userName">
+
                             User
+
                         </strong>
 
+
                         <span id="userEmail">
+
                             user@email.com
+
                         </span>
+
 
                     </div>
 
+
                 </div>
+
 
             </div>
 
+
         </header>
+
 
 
         <!-- ================= STAT CARDS ================= -->
 
         <section class="stats-grid">
 
+
+            <!-- LOST ITEMS -->
+
             <div class="stat-card">
+
 
                 <div class="stat-icon blue">
+
                     🔍
+
                 </div>
+
 
                 <div>
 
+
                     <span class="stat-label">
+
                         Lost Items
+
                     </span>
 
-                    <h2>
-                        24
+
+                    <h2 id="lostCount">
+
+                        0
+
                     </h2>
 
+
                     <p class="stat-positive">
-                        ↑ 12% this month
+
+                        Lost items reported
+
                     </p>
 
+
                 </div>
+
 
             </div>
 
 
+
+            <!-- FOUND ITEMS -->
+
             <div class="stat-card">
+
 
                 <div class="stat-icon green">
+
                     📦
+
                 </div>
+
 
                 <div>
 
+
                     <span class="stat-label">
+
                         Found Items
+
                     </span>
 
-                    <h2>
-                        18
+
+                    <h2 id="foundCount">
+
+                        0
+
                     </h2>
 
+
                     <p class="stat-positive">
-                        ↑ 8% this month
+
+                        Found items reported
+
                     </p>
 
+
                 </div>
+
 
             </div>
 
 
+
+            <!-- RETURNED ITEMS -->
+
             <div class="stat-card">
+
 
                 <div class="stat-icon orange">
+
                     🤝
+
                 </div>
+
 
                 <div>
 
+
                     <span class="stat-label">
+
                         Items Returned
+
                     </span>
 
-                    <h2>
-                        12
+
+                    <h2 id="returnedCount">
+
+                        0
+
                     </h2>
 
+
                     <p class="stat-positive">
-                        ↑ 15% this month
+
+                        Successfully returned
+
                     </p>
+
 
                 </div>
 
+
             </div>
 
+
+
+            <!-- MY REPORTS -->
 
             <div class="stat-card">
 
+
                 <div class="stat-icon purple">
+
                     ❤️
+
                 </div>
+
 
                 <div>
 
+
                     <span class="stat-label">
+
                         My Reports
+
                     </span>
 
-                    <h2>
-                        6
+
+                    <h2 id="myReportsCount">
+
+                        0
+
                     </h2>
 
+
                     <p class="stat-neutral">
-                        Active reports
+
+                        Your active reports
+
                     </p>
+
 
                 </div>
 
+
             </div>
 
+
         </section>
+
 
 
         <!-- ================= QUICK ACTIONS ================= -->
 
         <section class="dashboard-section">
 
+
             <div class="section-header">
+
 
                 <div>
 
+
                     <h2>
+
                         Quick Actions
+
                     </h2>
 
+
                     <p>
+
                         What would you like to do?
+
                     </p>
+
 
                 </div>
 
+
             </div>
+
 
 
             <div class="quick-actions">
 
-                <button class="action-card">
+
+                <!-- SEARCH LOST ITEMS -->
+
+                <button
+                    class="action-card"
+                    onclick="searchLostItems()"
+                >
+
 
                     <div class="action-icon blue-bg">
+
                         🔍
+
                     </div>
+
 
                     <div>
 
+
                         <h3>
+
                             Search Lost Items
+
                         </h3>
 
+
                         <p>
+
                             Find an item someone reported lost.
+
                         </p>
+
 
                     </div>
 
+
                     <span class="arrow">
+
                         →
+
                     </span>
+
 
                 </button>
 
 
-                <button class="action-card">
+
+                <!-- REPORT FOUND ITEM -->
+
+                <button
+                    class="action-card"
+                    onclick="reportFoundItem()"
+                >
+
 
                     <div class="action-icon green-bg">
+
                         📦
+
                     </div>
+
 
                     <div>
 
+
                         <h3>
+
                             Report Found Item
+
                         </h3>
 
+
                         <p>
+
                             Help someone find their lost item.
+
                         </p>
+
 
                     </div>
 
+
                     <span class="arrow">
+
                         →
+
                     </span>
+
 
                 </button>
 
 
-                <button class="action-card">
+
+                <!-- REPORT LOST ITEM -->
+
+                <button
+                    class="action-card"
+                    onclick="reportLostItem()"
+                >
+
 
                     <div class="action-icon orange-bg">
+
                         📢
+
                     </div>
+
 
                     <div>
 
+
                         <h3>
+
                             Report Lost Item
+
                         </h3>
 
+
                         <p>
+
                             Tell others about your lost item.
+
                         </p>
+
 
                     </div>
 
+
                     <span class="arrow">
+
                         →
+
                     </span>
 
+
                 </button>
+
 
             </div>
 
+
         </section>
+
 
 
         <!-- ================= RECENT ITEMS ================= -->
 
         <section class="dashboard-section">
 
+
             <div class="section-header">
+
 
                 <div>
 
+
                     <h2>
+
                         Recent Items
+
                     </h2>
 
+
                     <p>
+
                         Recently reported lost and found items.
+
                     </p>
 
+
                 </div>
 
-                <button class="view-all">
+
+
+                <button
+                    class="view-all"
+                    onclick="viewAllItems()"
+                >
+
                     View All →
+
                 </button>
 
-            </div>
-
-
-            <div class="items-grid">
-
-
-                <!-- ITEM 1 -->
-
-                <div class="item-card">
-
-                    <div class="item-image blue-item">
-                        🎧
-                    </div>
-
-                    <div class="item-content">
-
-                        <span class="item-status lost">
-                            LOST
-                        </span>
-
-                        <h3>
-                            Wireless Headphones
-                        </h3>
-
-                        <p>
-                            📍 Main Street
-                        </p>
-
-                        <span class="item-time">
-                            2 hours ago
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ITEM 2 -->
-
-                <div class="item-card">
-
-                    <div class="item-image green-item">
-                        📱
-                    </div>
-
-                    <div class="item-content">
-
-                        <span class="item-status found">
-                            FOUND
-                        </span>
-
-                        <h3>
-                            Black Smartphone
-                        </h3>
-
-                        <p>
-                            📍 Library
-                        </p>
-
-                        <span class="item-time">
-                            5 hours ago
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ITEM 3 -->
-
-                <div class="item-card">
-
-                    <div class="item-image orange-item">
-                        🎒
-                    </div>
-
-                    <div class="item-content">
-
-                        <span class="item-status lost">
-                            LOST
-                        </span>
-
-                        <h3>
-                            Black Backpack
-                        </h3>
-
-                        <p>
-                            📍 Bus Station
-                        </p>
-
-                        <span class="item-time">
-                            Yesterday
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ITEM 4 -->
-
-                <div class="item-card">
-
-                    <div class="item-image purple-item">
-                        🔑
-                    </div>
-
-                    <div class="item-content">
-
-                        <span class="item-status found">
-                            FOUND
-                        </span>
-
-                        <h3>
-                            Set of Keys
-                        </h3>
-
-                        <p>
-                            📍 City Center
-                        </p>
-
-                        <span class="item-time">
-                            Yesterday
-                        </span>
-
-                    </div>
-
-                </div>
 
             </div>
+
+
+
+            <!--
+
+                JavaScript will load recent items here.
+
+            -->
+
+            <div
+                class="items-grid"
+                id="recentItems"
+            >
+
+
+                <!-- LOADING -->
+
+                <div
+                    class="item-card"
+                    id="loadingCard"
+                >
+
+                    <div
+                        class="item-image blue-item"
+                    >
+
+                        📦
+
+                    </div>
+
+
+                    <div class="item-content">
+
+
+                        <span class="item-status found">
+
+                            LOADING
+
+                        </span>
+
+
+                        <h3>
+
+                            Loading items...
+
+                        </h3>
+
+
+                        <p>
+
+                            📍 Please wait
+
+                        </p>
+
+
+                        <span class="item-time">
+
+                            Loading...
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
 
         </section>
 
 
+
     </main>
+
 
 </div>
 
 
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script>
 
-    /* =========================
-       LOAD USER
-    ========================= */
 
-    const userData =
-        localStorage.getItem("user");
+/* ==================================================
+   API CONFIGURATION
+================================================== */
 
-
-    if (userData) {
-
-        try {
-
-            const user =
-                JSON.parse(userData);
+const API_URL = "http://localhost:5000";
 
 
-            if (user.name) {
 
+/* ==================================================
+   CHECK LOGIN
+================================================== */
+
+const token =
+    localStorage.getItem("token");
+
+
+const userData =
+    localStorage.getItem("user");
+
+
+/*
+
+    If user is not logged in,
+    send them back to login page.
+
+*/
+
+if (!token || !userData) {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* ==================================================
+   LOAD USER INFORMATION
+================================================== */
+
+function loadUser() {
+
+    try {
+
+
+        const user =
+            JSON.parse(userData);
+
+
+        if (user.name) {
+
+            const userName =
                 document.getElementById(
                     "userName"
-                ).textContent = user.name;
+                );
+
+
+            if (userName) {
+
+                userName.textContent =
+                    user.name;
 
             }
 
+        }
 
-            if (user.email) {
 
+
+        if (user.email) {
+
+            const userEmail =
                 document.getElementById(
                     "userEmail"
-                ).textContent = user.email;
+                );
+
+
+            if (userEmail) {
+
+                userEmail.textContent =
+                    user.email;
 
             }
 
-        } catch (error) {
+        }
 
-            console.error(
-                "Unable to load user data"
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load user data:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ==================================================
+   LOAD DASHBOARD
+================================================== */
+
+async function loadDashboard() {
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                `${API_URL}/api/dashboard`,
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`,
+
+                        "Content-Type":
+                            "application/json"
+
+                    }
+
+                }
+            );
+
+
+
+        /* ==========================
+           CHECK RESPONSE
+        ========================== */
+
+        if (!response.ok) {
+
+
+            if (
+                response.status === 401 ||
+                response.status === 403
+            ) {
+
+                logout();
+
+                return;
+
+            }
+
+
+            throw new Error(
+                "Dashboard API error"
             );
 
         }
 
+
+
+        const data =
+            await response.json();
+
+
+
+        /* ==========================
+           UPDATE STATISTICS
+        ========================== */
+
+        if (data.stats) {
+
+
+            document.getElementById(
+                "lostCount"
+            ).textContent =
+                data.stats.lostItems ?? 0;
+
+
+
+            document.getElementById(
+                "foundCount"
+            ).textContent =
+                data.stats.foundItems ?? 0;
+
+
+
+            document.getElementById(
+                "returnedCount"
+            ).textContent =
+                data.stats.returnedItems ?? 0;
+
+
+
+            document.getElementById(
+                "myReportsCount"
+            ).textContent =
+                data.stats.myReports ?? 0;
+
+        }
+
+
+
+        /* ==========================
+           LOAD RECENT ITEMS
+        ========================== */
+
+        if (data.recentItems) {
+
+            loadRecentItems(
+                data.recentItems
+            );
+
+        }
+
+
+    } catch (error) {
+
+
+        console.error(
+            "Dashboard loading error:",
+            error
+        );
+
+
+        /*
+
+            If backend API is not ready yet,
+            show demo data.
+
+            This prevents the dashboard
+            from looking broken.
+
+        */
+
+        loadDemoDashboard();
+
+    }
+
+}
+
+
+
+/* ==================================================
+   DEMO DATA
+================================================== */
+
+function loadDemoDashboard() {
+
+
+    document.getElementById(
+        "lostCount"
+    ).textContent = "24";
+
+
+    document.getElementById(
+        "foundCount"
+    ).textContent = "18";
+
+
+    document.getElementById(
+        "returnedCount"
+    ).textContent = "12";
+
+
+    document.getElementById(
+        "myReportsCount"
+    ).textContent = "6";
+
+
+
+    const demoItems = [
+
+        {
+
+            title:
+                "Wireless Headphones",
+
+            status:
+                "lost",
+
+            location:
+                "Main Street",
+
+            time:
+                "2 hours ago",
+
+            icon:
+                "🎧"
+
+        },
+
+
+        {
+
+            title:
+                "Black Smartphone",
+
+            status:
+                "found",
+
+            location:
+                "Library",
+
+            time:
+                "5 hours ago",
+
+            icon:
+                "📱"
+
+        },
+
+
+        {
+
+            title:
+                "Black Backpack",
+
+            status:
+                "lost",
+
+            location:
+                "Bus Station",
+
+            time:
+                "Yesterday",
+
+            icon:
+                "🎒"
+
+        },
+
+
+        {
+
+            title:
+                "Set of Keys",
+
+            status:
+                "found",
+
+            location:
+                "City Center",
+
+            time:
+                "Yesterday",
+
+            icon:
+                "🔑"
+
+        }
+
+    ];
+
+
+    loadRecentItems(
+        demoItems
+    );
+
+}
+
+
+
+/* ==================================================
+   LOAD RECENT ITEMS
+================================================== */
+
+function loadRecentItems(items) {
+
+
+    const container =
+        document.getElementById(
+            "recentItems"
+        );
+
+
+    if (!container) {
+
+        return;
+
     }
 
 
-    /* =========================
-       LOGOUT
-    ========================= */
 
-    function logout() {
+    /* Clear old content */
 
-        localStorage.removeItem("token");
+    container.innerHTML = "";
 
-        localStorage.removeItem("user");
 
-        window.location.href =
-            "index.html";
+
+    /* ==========================
+       NO ITEMS
+    ========================== */
+
+    if (
+        !items ||
+        items.length === 0
+    ) {
+
+
+        container.innerHTML = `
+
+            <div
+                class="item-card"
+                style="
+                    grid-column: 1 / -1;
+                    text-align: center;
+                    padding: 40px;
+                "
+            >
+
+                <div
+                    class="item-image blue-item"
+                >
+
+                    📦
+
+                </div>
+
+
+                <div class="item-content">
+
+                    <h3>
+                        No recent items
+                    </h3>
+
+
+                    <p>
+                        No lost or found items
+                        have been reported yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        return;
 
     }
+
+
+
+    /* ==========================
+       CREATE ITEM CARDS
+    ========================== */
+
+    items.forEach(
+        function(item) {
+
+
+            const status =
+                item.status ||
+                "lost";
+
+
+            const statusClass =
+                status.toLowerCase();
+
+
+            const statusText =
+                status.toUpperCase();
+
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "item-card";
+
+
+
+            card.innerHTML = `
+
+                <div
+                    class="item-image ${getItemColor(statusClass)}"
+                >
+
+                    ${item.icon || "📦"}
+
+                </div>
+
+
+                <div class="item-content">
+
+
+                    <span
+                        class="item-status ${statusClass}"
+                    >
+
+                        ${statusText}
+
+                    </span>
+
+
+                    <h3>
+
+                        ${escapeHTML(
+                            item.title ||
+                            "Unknown Item"
+                        )}
+
+                    </h3>
+
+
+                    <p>
+
+                        📍
+                        ${escapeHTML(
+                            item.location ||
+                            "Unknown location"
+                        )}
+
+                    </p>
+
+
+                    <span class="item-time">
+
+                        ${
+                            item.time ||
+                            formatDate(
+                                item.created_at
+                            )
+                        }
+
+                    </span>
+
+
+                </div>
+
+            `;
+
+
+
+            /*
+
+                Clicking an item
+                can later open item details.
+
+            */
+
+            card.onclick =
+                function() {
+
+                    if (item.id) {
+
+                        openItem(
+                            item.id
+                        );
+
+                    }
+
+                };
+
+
+
+            container.appendChild(
+                card
+            );
+
+
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   ITEM COLOR
+================================================== */
+
+function getItemColor(status) {
+
+
+    if (status === "found") {
+
+        return "green-item";
+
+    }
+
+
+    if (status === "returned") {
+
+        return "purple-item";
+
+    }
+
+
+    return "blue-item";
+
+}
+
+
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
+function escapeHTML(value) {
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+/* ==================================================
+   FORMAT DATE
+================================================== */
+
+function formatDate(dateValue) {
+
+
+    if (!dateValue) {
+
+        return "Recently";
+
+    }
+
+
+    const date =
+        new Date(
+            dateValue
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "Recently";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+
+            year: "numeric",
+
+            month: "short",
+
+            day: "numeric"
+
+        }
+    );
+
+}
+
+
+
+/* ==================================================
+   QUICK ACTIONS
+================================================== */
+
+
+/* SEARCH LOST ITEMS */
+
+function searchLostItems() {
+
+    window.location.href =
+        "lost-items.html";
+
+}
+
+
+
+/* REPORT FOUND ITEM */
+
+function reportFoundItem() {
+
+    window.location.href =
+        "report-found.html";
+
+}
+
+
+
+/* REPORT LOST ITEM */
+
+function reportLostItem() {
+
+    window.location.href =
+        "report-lost.html";
+
+}
+
+
+
+/* REPORT ITEM */
+
+function reportItem() {
+
+    window.location.href =
+        "report-item.html";
+
+}
+
+
+
+/* VIEW ALL ITEMS */
+
+function viewAllItems() {
+
+    window.location.href =
+        "lost-items.html";
+
+}
+
+
+
+/* ==================================================
+   SIDEBAR NAVIGATION
+================================================== */
+
+function goDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+
+function goLostItems() {
+
+    window.location.href =
+        "lost-items.html";
+
+}
+
+
+
+function goFoundItems() {
+
+    window.location.href =
+        "found-items.html";
+
+}
+
+
+
+function openMessages() {
+
+    window.location.href =
+        "messages.html";
+
+}
+
+
+
+function openMyReports() {
+
+    window.location.href =
+        "my-reports.html";
+
+}
+
+
+
+function openSettings() {
+
+    window.location.href =
+        "settings.html";
+
+}
+
+
+
+function openProfile() {
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+
+function openNotifications() {
+
+    alert(
+        "No new notifications."
+    );
+
+}
+
+
+
+/* ==================================================
+   OPEN ITEM
+================================================== */
+
+function openItem(itemId) {
+
+    console.log(
+        "Opening item:",
+        itemId
+    );
+
+
+    /*
+
+        Later we can create:
+
+        item-details.html?id=123
+
+    */
+
+}
+
+
+
+/* ==================================================
+   LOGOUT
+================================================== */
+
+function logout() {
+
+
+    localStorage.removeItem(
+        "token"
+    );
+
+
+    localStorage.removeItem(
+        "user"
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* ==================================================
+   INITIALIZE DASHBOARD
+================================================== */
+
+loadUser();
+
+loadDashboard();
+
 
 </script>
 
+
 </body>
+
 </html>

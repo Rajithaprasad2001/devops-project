@@ -381,17 +381,347 @@ function togglePassword(
     }
 }
 
-
 /* =================================
    FORGOT PASSWORD
 ================================= */
 
-function forgotPassword() {
+let resetToken = null;
 
-    alert(
-        "Password reset feature will be added later."
-    );
+
+/* =================================
+   OPEN FORGOT PASSWORD
+================================= */
+
+function openForgotPassword() {
+
+    const modal =
+        document.getElementById(
+            "forgotPasswordModal"
+        );
+
+    modal.classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+
+    /* Reset to Step 1 */
+
+    document.getElementById(
+        "forgotStep"
+    ).style.display = "block";
+
+    document.getElementById(
+        "resetStep"
+    ).style.display = "none";
+
+    document.getElementById(
+        "forgotPasswordForm"
+    ).reset();
+
+    document.getElementById(
+        "resetPasswordForm"
+    ).reset();
+
+    resetToken = null;
 }
+
+
+/* =================================
+   CLOSE FORGOT PASSWORD
+================================= */
+
+function closeForgotPassword() {
+
+    const modal =
+        document.getElementById(
+            "forgotPasswordModal"
+        );
+
+    modal.classList.remove("active");
+
+    document.body.style.overflow =
+        "auto";
+
+    resetToken = null;
+}
+
+
+/* =================================
+   CHECK EMAIL
+================================= */
+
+const forgotPasswordForm =
+    document.getElementById(
+        "forgotPasswordForm"
+    );
+
+
+forgotPasswordForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+        const email =
+            document
+                .getElementById("forgotEmail")
+                .value
+                .trim();
+
+        if (!email) {
+
+            alert(
+                "Please enter your email address."
+            );
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/forgot-password`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email: email
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    data.message ||
+                    "Email not found."
+                );
+
+                return;
+            }
+
+
+            /*
+             * Save reset token temporarily.
+             */
+
+            resetToken =
+                data.resetToken;
+
+
+            /*
+             * Move to reset password step.
+             */
+
+            document.getElementById(
+                "forgotStep"
+            ).style.display = "none";
+
+            document.getElementById(
+                "resetStep"
+            ).style.display = "block";
+
+
+            alert(
+                "Email verified successfully! 🔐"
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Cannot connect to the server.\n\n" +
+                "Please make sure the backend is running."
+            );
+
+        }
+
+    }
+);
+
+
+/* =================================
+   RESET PASSWORD
+================================= */
+
+const resetPasswordForm =
+    document.getElementById(
+        "resetPasswordForm"
+    );
+
+
+resetPasswordForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const newPassword =
+            document
+                .getElementById("newPassword")
+                .value;
+
+
+        const confirmPassword =
+            document
+                .getElementById(
+                    "resetConfirmPassword"
+                )
+                .value;
+
+
+        /* CHECK PASSWORD LENGTH */
+
+        if (newPassword.length < 6) {
+
+            alert(
+                "Password must contain at least 6 characters."
+            );
+
+            return;
+        }
+
+
+        /* CHECK PASSWORD MATCH */
+
+        if (
+            newPassword !==
+            confirmPassword
+        ) {
+
+            alert(
+                "Passwords do not match."
+            );
+
+            return;
+        }
+
+
+        /* CHECK TOKEN */
+
+        if (!resetToken) {
+
+            alert(
+                "Reset session expired. Please try again."
+            );
+
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/reset-password`,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            resetToken:
+                                resetToken,
+
+                            newPassword:
+                                newPassword
+
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    data.message ||
+                    "Password reset failed."
+                );
+
+                return;
+            }
+
+
+            /* SUCCESS */
+
+            alert(
+                "Password reset successfully! 🎉\n\n" +
+                "You can now login with your new password."
+            );
+
+
+            /*
+             * Close modal
+             */
+
+            closeForgotPassword();
+
+
+            /*
+             * Put email back into login.
+             */
+
+            const forgotEmail =
+                document
+                    .getElementById(
+                        "forgotEmail"
+                    )
+                    .value;
+
+            document
+                .getElementById(
+                    "loginEmail"
+                )
+                .value =
+                forgotEmail;
+
+
+            /*
+             * Clear password fields
+             */
+
+            document
+                .getElementById(
+                    "loginPassword"
+                )
+                .value = "";
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Cannot connect to the server.\n\n" +
+                "Please make sure the backend is running."
+            );
+
+        }
+
+    }
+);
 
 
 /* =================================

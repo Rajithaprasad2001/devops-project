@@ -169,7 +169,7 @@
 
                 <a
                     href="#"
-                    onclick="forgotPassword()"
+                   onclick="openForgotPassword(); return false;"
                 >
                     Forgot Password?
                 </a>
@@ -397,6 +397,204 @@
             >
                 Login
             </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- =========================
+     FORGOT PASSWORD MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="forgotPasswordModal"
+>
+
+    <div class="signup-card">
+
+        <button
+            class="close-button"
+            onclick="closeForgotPassword()"
+        >
+            ×
+        </button>
+
+        <!-- STEP 1 -->
+
+        <div
+            id="forgotStep"
+        >
+
+            <div class="signup-header">
+
+                <div class="signup-icon">
+                    🔐
+                </div>
+
+                <h2>
+                    Forgot Password?
+                </h2>
+
+                <p>
+                    Enter your registered email address
+                    to reset your password.
+                </p>
+
+            </div>
+
+
+            <form id="forgotPasswordForm">
+
+                <div class="form-group">
+
+                    <label for="forgotEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="forgotEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                >
+                    Continue
+                </button>
+
+            </form>
+
+
+            <div class="already-account">
+
+                Remember your password?
+
+                <button
+                    type="button"
+                    onclick="closeForgotPassword()"
+                >
+                    Back to Login
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- STEP 2 -->
+
+        <div
+            id="resetStep"
+            style="display: none;"
+        >
+
+            <div class="signup-header">
+
+                <div class="signup-icon">
+                    🔑
+                </div>
+
+                <h2>
+                    Reset Password
+                </h2>
+
+                <p>
+                    Create a new password for your account.
+                </p>
+
+            </div>
+
+
+            <form id="resetPasswordForm">
+
+                <!-- NEW PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="newPassword">
+                        New Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="newPassword"
+                            placeholder="Enter new password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword('newPassword', this)"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="resetConfirmPassword">
+                        Confirm New Password
+                    </label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="resetConfirmPassword"
+                            placeholder="Confirm new password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword('resetConfirmPassword', this)"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                >
+                    Reset Password
+                </button>
+
+            </form>
+
+
+            <div class="already-account">
+
+                <button
+                    type="button"
+                    onclick="closeForgotPassword()"
+                >
+                    Back to Login
+                </button>
+
+            </div>
 
         </div>
 
