@@ -750,6 +750,69 @@ signupModal.addEventListener(
 
 
 /* =================================
+   THEME TOGGLE
+================================= */
+
+function applyTheme(theme) {
+
+    const isDark = theme === "dark";
+
+    document.body.classList.toggle(
+        "dark-theme",
+        isDark
+    );
+
+    const toggleButton =
+        document.getElementById("themeToggle");
+
+    if (toggleButton) {
+        toggleButton.querySelector(
+            ".theme-toggle-icon"
+        ).textContent =
+            isDark ? "☀️" : "🌙";
+
+        toggleButton.setAttribute(
+            "aria-label",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
+        );
+    }
+}
+
+function initializeTheme() {
+
+    const savedTheme =
+        localStorage.getItem("theme") ||
+        "light";
+
+    applyTheme(savedTheme);
+
+    const toggleButton =
+        document.getElementById("themeToggle");
+
+    if (toggleButton) {
+        toggleButton.addEventListener(
+            "click",
+            function () {
+
+                const nextTheme =
+                    document.body.classList.contains(
+                        "dark-theme"
+                    ) ? "light" : "dark";
+
+                localStorage.setItem(
+                    "theme",
+                    nextTheme
+                );
+
+                applyTheme(nextTheme);
+            }
+        );
+    }
+}
+
+initializeTheme();
+
+/* =================================
    ESC KEY
 ================================= */
 
